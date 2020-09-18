@@ -1,0 +1,15 @@
+## Purpose:  
+This app is designed to compile multiple website purchase data into one for an easy user cross comparison and search for the lowest priced item specific to the outdoor retail industry.  
+
+## Additional Information:  
+This app was created using macOS and ParseHub for web scraping.  
+
+*API\_KEY*, *SECRET_KEY*, and tokens (tokens are keys for the latest scraped data) have been excluded from these commits to preserve security.  The live version to be posted soon online will include full functionality, but for now will require creating your own account and creating your own project in Parsehub to be accepted by the app.
+
+*localhost:5000/upload* will need to be used to upload data from the parsehub projects in order to seed your database.
+
+## Future implementation:  
+Possibilities for the future include a wider range of ecommerce sources and expanded product selection.  Additionally, I plan to increase the efficiency of searchability of items and perfect product filter settings.
+
+## API:  
+https://www.parsehub.com/

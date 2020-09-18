@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Retailer Products{% endblock %}
+
+{% block content %}
+<br><br><br>
+
+<div class="container text-center p-5">
+    
+<div class="m-4">
+
+    <h1>{{ retailer }}</h1>
+
+    <div class="row">
+    {% for category in products %}
+    <div class="col-md-12">
+        <h1>{{ category.category }}</h1>
+    </div> 
+        {% for product in category.products %}
+        <div class="col-md-3 my-2">
+
+        <div class="card" style="width: 11rem;">
+            <img class="card-img-top p-4" src={{ product.image }} alt="{{product.model}} image">
+            <div class="card-body">
+              <p class="card-text">{{ product.brand }} - {{ product.model }}<br>${{ product.price }}</p>
+              <a href={{ product.model_url }} class="btn btn-info">Shop</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    {% endfor %}
+    </div>
+
+</div>
+
+<!-- <div class="container-flex p-5">
+    <div class="row">
+        <div class="col-lg-7">
+        <b>About</b><br>
+        Established 2020 to provide a pricing comparison between <br>
+        online retailers to find the best deals and compare deals.
+        </div>
+        <div class="col-lg-3">
+        <b>Contact</b><br>
+        <a href="https://www.linkedin.com/in/leifaflor/">LinkedIn</a><br>
+        <a href="https://github.com/lafBot">Github</a>
+        </div>
+        <div class="col-lg-2">
+        <b>Suggest an edit</b><br>
+        <a href="https://github.com/lafBot/PriceComparison/issues">Report an issue</a>
+        </div>
+    </div>
+</div> -->
+{% endblock %}
