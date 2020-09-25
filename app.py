@@ -1,9 +1,9 @@
-from flask import Flask, render_template, redirect, flash
+from flask import Flask, render_template, redirect, flash, request, jsonify
 import requests
+import json
 from keys import API_KEY, SECRET_KEY, tokens
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, Activity, Product, Category, Company
-# from seed import seed_db
+from models import db, connect_db, Activity, Product, Category, ListingAssociation, VendorListing
 import pdb
 
 app = Flask(__name__)
@@ -21,82 +21,50 @@ connect_db(app)
 def home_page():
     return render_template('home.html')
 
-def seed_db(retailer, data):
-    company_id = Company.query.filter_by(company_name=retailer).first()
-    for cat in data[retailer]:
-        for product in cat["products"]:
-            category_id = Category.query.filter_by(category_name=cat["category"]).first()
-            prod = Product(brand=product["brand"],
-                            model=product["model"],
-                            model_url=product["model_url"],
-                            image=product["image"],
-                            price=product["price"],
-                            company=company_id,
-                            category=category_id)
-            db.session.add(prod)
-            db.session.commit()
-
-@app.route('/upload')
-def import_data():
-    for retailer in ["Backcountry", "REI"]:
-        token = tokens[retailer]
-        resp = requests.get(f'https://www.parsehub.com/api/v2/projects/{token}/last_ready_run/data', params={"api_key": API_KEY})
-        data = resp.json()
-        seed_db(retailer, data)
-    return redirect('/')
-
 @app.route('/retailers')
 def retailers():
     return render_template('retailers.html')
 
-@app.route('/retailers/<retailer>')
-def show_by_retailer(retailer):
-    if retailer not in tokens:
-        flash("Invalid retailer request")
-        return redirect('/retailers')
-    
-    token = tokens[retailer]
-    resp = requests.get(f'https://www.parsehub.com/api/v2/projects/{token}/last_ready_run/data', params={"api_key": API_KEY})
-    data = resp.json()
-    return render_template('retailer.html', retailer=retailer, products=data[retailer])
-
 @app.route('/activities')
 def activities():
+    """ Show activity options - ex: climbing, trail running """
     activities = Activity.query.all()
     return render_template('activities.html', activities=activities)
 
+@app.route('/activity/<activity>', methods=["GET"])
+def products(activity):
+    """ Display products for selected activity with the ability to filter products """
 
-@app.route('/activity/<activity>')
-def activity_products(activity):
     activity_id = Activity.query.filter_by(activity=activity).first().id
-    categories = Category.query.filter_by(activity_id=activity_id).all()
+    all_categories = Category.query.filter_by(activity_id=activity_id).all()
 
-    return render_template('activity_categories.html', activity=activity, categories=categories)
+    if request.args:
+        filters = []
+        
+        """Identify visitor filter selection to apply and add to filters list"""
+        for option in all_categories:
+            if option.category_name in request.args:
+                filters.append(option.category_name)
+        
+        """Get the category id of the filters to be applied"""
+        filter_ids = []
+        for cat in filters:
+            category = Category.query.filter_by(category_name=cat).first()
+            filter_ids.append(category.id)
+        
+        """Identify products in filtered categories and add to products list"""
+        products = []
+        for identity in filter_ids:
+            filtered_products = Product.query.filter_by(category_id=identity).all()
+            for product in filtered_products:
+                products.append(product)
+        return render_template('products.html', checked=filters, categories=all_categories, activity=activity, products=products)
 
-@app.route('/activity/<activity>/<category>')
-def category_products(activity, category):
-    cat = Category.query.filter_by(category_name=category).first()
-    products = Product.query.filter_by(category_id=cat.id).all()
-    # pdb.set_trace()
-    return render_template('category_products.html', category=category, activity=activity, products=products)
+    category = Category.query.filter_by(activity_id=activity_id).all()
+    products = []
+    for cat in category:
+        cat_prods = Product.query.filter_by(category_id=cat.id).all()
+        for prod in cat_prods:
+            products.append(prod)
 
-
-# @app.route('/activity/<activity>')
-# def activity_products(activity):
-#     activity = activity.lower()
-#     products = {}
-#     set_products = set()
-
-#     categories = {"climb": ["belay_devices"], "hike_and_camp": [], "run": ["mens_trail_running_shoes"], "ski": [], "paddle": [], "fish": []}
-
-#     for retailer in tokens:
-#         for subcategory in categories[activity]:
-#             token = tokens[retailer]
-#             resp = requests.get(f'https://www.parsehub.com/api/v2/projects/{token}/last_ready_run/data', params={"api_key": API_KEY})
-#             data = resp.json()
-#             for index in data[retailer]:
-#                 if index["category"]:
-#                     products[retailer] = index["products"]
-#                     [set_products.add(item['model']) for item in index["products"]]
-
-#     return render_template('activity_products.html', activity= activity, set_products=set_products, products=products)
+    return render_template('products.html', categories=all_categories, activity=activity, products=products)

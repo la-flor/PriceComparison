@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}{% endblock %}</title>
     <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Jomolhari&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/app.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
   <div class="fixed-top">
@@ -25,10 +27,10 @@
               <a class="nav-link" href="/activities">Activities</a>
             </li>
           </ul>
-          <ul class="navbar-nav mr-2">
+          <!-- <ul class="navbar-nav mr-2">
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </nav>
@@ -42,25 +44,6 @@
     {% block content %}
 
     {% endblock %}
-<!-- 
-    <div class="container-flex p-5">
-      <div class="row">
-          <div class="col-lg-7">
-            <b>About</b><br>
-            Established 2020 to provide a pricing comparison between <br>
-            online retailers to find the best deals and compare deals.
-          </div>
-          <div class="col-lg-3">
-            <b>Contact</b><br>
-            <a href="https://www.linkedin.com/in/leifaflor/">LinkedIn</a><br>
-            <a href="https://github.com/lafBot">Github</a>
-          </div>
-          <div class="col-lg-2">
-            <b>Suggest an edit</b><br>
-            <a href="https://github.com/lafBot/PriceComparison/issues">Report an issue</a>
-          </div>
-      </div>
-    </div> -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

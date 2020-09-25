@@ -1,18 +1,18 @@
 // Carousel functionality for home page
 $('.carousel').carousel({
-    interval: 6000,
+    interval: 4000,
     pause: "false"
   });
 
-var $item = $('.carousel-item');
-var $wHeight = $(window).height();
+let $item = $('.carousel-item');
+let $wHeight = $(window).height();
 
 $item.height($wHeight);
 $item.addClass('full-screen');
 
 $('.carousel img').each(function() {
-    var $src = $(this).attr('src');
-    var $color = $(this).attr('data-color');
+    let $src = $(this).attr('src');
+    let $color = $(this).attr('data-color');
 
     $(this).parent().css({
         'background-image' : 'url(' + $src + ')',
@@ -29,5 +29,3 @@ $(window).on('resize', function (){
 $item.eq(0).addClass('active');
 
 //  end of carousel
-
-

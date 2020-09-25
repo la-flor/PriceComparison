@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ activity }} Products{% endblock %}
+
+{% block content %}
+
+
+<br><br><br><br>
+
+<div class="col-12">
+    <img src="/static/images/banner_desert.jpeg" width="100%">
+</div>
+
+<div class="container-flex">
+
+    <div class="row">
+
+    <div class="col-md-2 col-sm-12 my-2 pt-5 mt-5 mx-5 p-4 filters">
+
+        <h3>Filters:</h3><br>
+        <form id="filter" action="/activity/{{ activity }}" method="GET">
+            {% for cat in categories %}
+                <input type="checkbox" class="filter-input" name="{{cat.category_name}}" value="{{cat.category_name}}" 
+                {% if cat.category_name in checked %}
+                checked
+                {% endif %}>
+                <label for="{{cat.category_name}}">{{cat.category_name}}</label>
+                <br>
+            {% endfor %}
+            <button type="submit" class="btn btn-outline" id="apply-filter">Apply</button>
+        </form>
+    
+    </div>
+
+
+<div class="container text-center">
+
+    <div class="row pb-5 mb-5">
+
+        <div class="col-12 pt-4">
+            <h1>{{ activity }}</h1>
+        </div>
+
+        {% for item in products %}
+            <div class="col-lg-3 col-md-4">
+
+                <div class="card border-0" style="width: 11rem;">
+                    <img class="card-img-top p-4" src={{ item.image }} alt="{{ item.model }} image">
+                    <div class="card-body">
+                    <p class="card-text"><i>{{ item.brand }}</i><br>{{ item.model }}</p>
+                    <p>
+                        <div class="dropdown">
+                            <button type="button" class="btn-sm btn-outline dropdwon-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Lowest Price <i class="fas fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                {% for listing in item.listings %}
+                                    <a class="dropdown-item" href={{ listing.model_url }}>{{ listing.vendor_name }} - ${{ listing.price }}</a>
+                                {% endfor %}
+                            </div>
+                          </div>
+
+
+
+                    </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+</div>
+{% endblock %}

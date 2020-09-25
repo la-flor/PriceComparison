@@ -15,16 +15,16 @@ class Product(db.Model):
                         nullable=False)
     model = db.Column(db.Text,
                         nullable=False)
-    model_url = db.Column(db.Text,
-                        nullable=False)
     image = db.Column(db.Text,
                         nullable=False)
-    price = db.Column(db.Float,
-                        nullable=False)
-    company_id = db.Column(db.Integer,
-                        db.ForeignKey("companies.id"))
     category_id = db.Column(db.Integer,
                         db.ForeignKey("categories.id"))
+    activity = db.relationship("Activity",
+                                secondary="categories",
+                                backref="products")
+    listings = db.relationship("VendorListing",
+                                secondary="listing_associations",
+                                backref="products")
 
 
 class Activity(db.Model):
@@ -47,19 +47,37 @@ class Category(db.Model):
     category_name = db.Column(db.Text,
                                 nullable=False,
                                 unique=True)
-    activity_id = db.Column(db.Integer, db.ForeignKey("activities.id"))
-    products = db.relationship("Product", backref="category")
+    image = db.Column(db.Text)
+    # need to make image nullable = false after retrieving relevant images
+    activity_id = db.Column(db.Integer,
+                                db.ForeignKey("activities.id"))
+    products = db.relationship("Product",
+                                backref="category")
 
-class Company(db.Model):
-    """Company identification"""
-    __tablename__ = "companies"
+class ListingAssociation(db.Model):
+    """Links relationship between vendors and the products that they sell that have been scraped"""
+    __tablename__ = "listing_associations"
 
     id = db.Column(db.Integer,
                         primary_key=True)
-    company_name = db.Column(db.Text,
-                                nullable=False,
-                                unique=True)
-    products = db.relationship("Product", backref="company")
+    product_id = db.Column(db.Integer,
+                            db.ForeignKey("products.id"))
+    vendor_id = db.Column(db.Integer,
+                            db.ForeignKey("vendor_listings.id"))
+
+class VendorListing(db.Model):
+    """Vendor/Company identification for sourced products"""
+    __tablename__ = "vendor_listings"
+
+    id = db.Column(db.Integer,
+                        primary_key=True)
+    vendor_name = db.Column(db.Text,
+                                nullable=False)
+    model_url = db.Column(db.Text,
+                        nullable=False)
+    price = db.Column(db.Float,
+                        nullable=False)
+
 
 def connect_db(app):
     """Connect this database to provided Flask app."""
