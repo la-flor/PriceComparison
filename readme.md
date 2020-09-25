@@ -6,7 +6,7 @@ This app was created using macOS and ParseHub for web scraping.
 
 *API\_KEY*, *SECRET_KEY*, and tokens (tokens are keys for the latest scraped data) have been excluded from these commits to preserve security.  The live version to be posted soon online will include full functionality, but for now will require creating your own account and creating your own project in Parsehub to be accepted by the app.
 
-Databases to add:  
+Databases to create for functionality:  
  1. pricecomp_test
  2. price_comparison
 

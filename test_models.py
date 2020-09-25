@@ -13,7 +13,7 @@ class SeedDatabaseTestCase(TestCase):
     """Test for adding products to database"""
 
     def setUp(self):
-        """Clear all data"""
+        """Clear all data and create database information"""
         db.drop_all()
         db.create_all()
 
