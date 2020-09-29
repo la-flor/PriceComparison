@@ -7,42 +7,67 @@
 
 <br><br><br><br>
 
-<div class="col-12">
+<div class="col-12 overlay">
     <img src="/static/images/banner_desert.jpeg" width="100%">
-</div>
-
-<div class="container-flex">
-
-    <div class="row">
-
-    <div class="col-md-2 col-sm-12 my-2 pt-5 mt-5 mx-5 p-4 filters">
-
-        <h3>Filters:</h3><br>
-        <form id="filter" action="/activity/{{ activity }}" method="GET">
-            {% for cat in categories %}
-                <input type="checkbox" class="filter-input" name="{{cat.category_name}}" value="{{cat.category_name}}" 
-                {% if cat.category_name in checked %}
-                checked
-                {% endif %}>
-                <label for="{{cat.category_name}}">{{cat.category_name}}</label>
-                <br>
-            {% endfor %}
-            <button type="submit" class="btn btn-outline" id="apply-filter">Apply</button>
-        </form>
     
+    <div class="title">
+        {{ activity }}
     </div>
 
+</div>
 
-<div class="container text-center">
+<div class="container mb-3">
+            <nav class="navbar navbar-expand-sm bg-light navbar-light mx-5 px-5">
+                <ul class="navbar-nav mr-auto">
+
+                    <!-- Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            Filters
+                            </a>
+                            <div class="dropdown-menu p-2 round">
+                                <form id="filter" class="form-check" action="/activity/{{ activity }}" method="GET">
+                                    {% for cat in categories %}
+                                    <!-- <label> -->
+                                        <input type="checkbox" class="filter-input form-check-input" name="{{cat.category_name}}" value="{{cat.category_name}}" 
+                                            {% if cat.category_name in checked %}
+                                            checked
+                                            {% endif %}><label class="form-check-label" for="{{cat.category_name}}">{{cat.category_name}}</label><br>
+                                    <!-- </label> -->
+                                    {% endfor %}
+
+                                <div class="dropdown-divider"></div>
+                                <label class="dropdown-item-text"><button type="submit" class="btn btn-outline" id="apply-filter">Apply</button></label>
+            
+                            </div>
+                        </li>
+                    </form>
+
+                </ul>
+                    <form class="form-inline" action="/activity/{{ activity }}" method="POST">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
+                        <button class="btn btn-info" type="submit">Search</button>
+                    </form>
+
+            </nav>
+</div>
+
+
+
+
+<!-- product cards below -->
+
+<div class="container col-sm-12 col-md-9 col-lg-8">
 
     <div class="row pb-5 mb-5">
 
-        <div class="col-12 pt-4">
-            <h1>{{ activity }}</h1>
-        </div>
+        {% if products | length < 1 %}
+            <h1>No products fit this criteria</h1>
+        {% endif %}
+
 
         {% for item in products %}
-            <div class="col-lg-3 col-md-4">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 
                 <div class="card border-0" style="width: 11rem;">
                     <img class="card-img-top p-4" src={{ item.image }} alt="{{ item.model }} image">
@@ -68,7 +93,4 @@
             </div>
         {% endfor %}
     </div>
-</div>
-
-</div>
 {% endblock %}

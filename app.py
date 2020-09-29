@@ -31,14 +31,35 @@ def activities():
     activities = Activity.query.all()
     return render_template('activities.html', activities=activities)
 
-@app.route('/activity/<activity>', methods=["GET"])
+@app.route('/activity/<activity>', methods=["GET", "POST"])
 def products(activity):
     """ Display products for selected activity with the ability to filter products """
 
     activity_id = Activity.query.filter_by(activity=activity).first().id
     all_categories = Category.query.filter_by(activity_id=activity_id).all()
+    cat_ids = []
 
-    if request.args:
+    for cat in all_categories:
+        cat_ids.append(cat.id)
+
+    if request.method == "POST":
+        params = request.form["search"]
+        products = []
+        models = Product.query.filter(Product.model.ilike(f'%{params}%')).all()
+        make = Product.query.filter(Product.brand.ilike(f'%{params}%')).all()
+        
+        if models:
+            for prod in models:
+                if prod.category_id in cat_ids:
+                    products.append(prod)
+        if make:
+            for prod in make:
+                if prod.category_id in cat_ids:
+                    products.append(prod)
+
+        return render_template('products.html', categories=all_categories, activity=activity, products=products)
+
+    elif request.args:
         filters = []
         
         """Identify visitor filter selection to apply and add to filters list"""
@@ -60,11 +81,12 @@ def products(activity):
                 products.append(product)
         return render_template('products.html', checked=filters, categories=all_categories, activity=activity, products=products)
 
-    category = Category.query.filter_by(activity_id=activity_id).all()
-    products = []
-    for cat in category:
-        cat_prods = Product.query.filter_by(category_id=cat.id).all()
-        for prod in cat_prods:
-            products.append(prod)
+    else:
+        category = Category.query.filter_by(activity_id=activity_id).all()
+        products = []
+        for cat in category:
+            cat_prods = Product.query.filter_by(category_id=cat.id).all()
+            for prod in cat_prods:
+                products.append(prod)
 
-    return render_template('products.html', categories=all_categories, activity=activity, products=products)
+        return render_template('products.html', categories=all_categories, activity=activity, products=products)

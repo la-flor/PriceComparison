@@ -16,6 +16,7 @@ body {
     border-color: #687477;
 }
 
+
 /* For home page carousel */
 .full-screen {
     background-size: cover;
@@ -34,4 +35,33 @@ body {
     left: 50%;
     font-size: 2rem;
     transform: translate(-50%, -50%);
+}
+
+/* For products page */
+
+.card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+}
+
+#filters {
+    min-width: 260px;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+}
+
+.title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 5rem;
+    transform: translate(-50%, -50%);
+    color: rgb(248, 249, 249, 0.6);
+    z-index: 1;
+}
+
+.round {
+    border-radius: 10px;
 }
