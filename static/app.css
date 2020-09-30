@@ -2,19 +2,6 @@ body {
     font-family: 'Jomolhari', serif;
 }
 
-#dropdownMenuButton:hover {
-    border-width: 3;
-    border-color: black;
-}
-
-.btn-sm {
-    border-color:  #687477;
-    background-color: #F7F3F5;
-}
-
-#apply-filter {
-    border-color: #687477;
-}
 
 
 /* For home page carousel */
@@ -36,6 +23,10 @@ body {
     font-size: 2rem;
     transform: translate(-50%, -50%);
 }
+
+
+
+
 
 /* For products page */
 
@@ -66,10 +57,21 @@ body {
     border-radius: 10px;
 }
 
-/* Retailers styles */
+#dropdownMenuButton:hover {
+    border-width: 3;
+    border-color: black;
+}
+
+.filter-input {
+    margin: 200px;
+}
+
+
+
+/* Retailers page styles */
 
 body#retailers-body {
-    background-image: url("/static/images/background_kayaker.jpg");
+    background-image: url("/static/images/background_mtnlandscape.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -81,6 +83,55 @@ body#retailers-body {
 }
 
 div.retailers {
-    background: rgb(100%,100%,100%,.4);
+    background: rgb(100%,100%,100%,.2);
     min-height: 850px;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    padding-top: 50px;
+    border-radius: 10px;
+}
+
+.retailers-row {
+    margin-top: 150px;
+}
+
+
+
+/* Activities page styles */
+
+body#activities-body {
+    background-image: url("/static/images/background_wanaka.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+#title-activities {
+    font-size: 5rem;
+    color: rgb(0, 0, 0);
+}
+
+div.activities {
+    background: rgb(100%,100%,100%,.2);
+    min-height: 850px;
+    text-align: center;
+    padding: 40px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    padding-top: 50px;
+    border-radius: 10px;
+}
+
+.activity-image {
+    width: 250px;
+}
+
+.activities-row {
+    margin-top: 150px;
+}
+
+div.activity {
+    padding-left: 30px;
+    padding-right: 30px;
 }

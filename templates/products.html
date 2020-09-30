@@ -26,18 +26,19 @@
                             Filters
                             </a>
                             <div class="dropdown-menu p-2 round">
-                                <form id="filter" class="form-check" action="/activity/{{ activity }}" method="GET">
+                                <form class="form-check" action="/activity/{{ activity }}" method="GET">
                                     {% for cat in categories %}
-                                    <!-- <label> -->
-                                        <input type="checkbox" class="filter-input form-check-input" name="{{cat.category_name}}" value="{{cat.category_name}}" 
+                                    
+                                        <input type="checkbox" class="form-check-input" name="{{cat.category_name}}" value="{{cat.category_name}}" 
                                             {% if cat.category_name in checked %}
                                             checked
-                                            {% endif %}><label class="form-check-label" for="{{cat.category_name}}">{{cat.category_name}}</label><br>
-                                    <!-- </label> -->
+                                            {% endif %}>
+                                        <label class="form-check-label" for="{{cat.category_name}}">{{cat.category_name}}</label>
+                                        <br>                                    
                                     {% endfor %}
 
                                 <div class="dropdown-divider"></div>
-                                <label class="dropdown-item-text"><button type="submit" class="btn btn-outline" id="apply-filter">Apply</button></label>
+                                <label class="dropdown-item-text"><button type="submit" class="btn btn-info">Apply</button></label>
             
                             </div>
                         </li>
@@ -59,38 +60,45 @@
 
 <div class="container col-sm-12 col-md-9 col-lg-8">
 
-    <div class="row pb-5 mb-5">
+    <div class="row pb-5 mb-5 justify-content-center">
 
         {% if products | length < 1 %}
-            <h1>No products fit this criteria</h1>
-        {% endif %}
+        <div class="text-center">
+            <p class="my-5">
+                <h1>No products fit this criteria</h1>
+            </p>
+            
+            <p class="my-5">
+                <a href="/activity/{{ activity }}">Clear Search</a>
+            </p>
+        </div>
+        {% else %}
+            {% for item in products %}
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 
-
-        {% for item in products %}
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-
-                <div class="card border-0" style="width: 11rem;">
-                    <img class="card-img-top p-4" src={{ item.image }} alt="{{ item.model }} image">
-                    <div class="card-body">
-                    <p class="card-text"><i>{{ item.brand }}</i><br>{{ item.model }}</p>
-                    <p>
-                        <div class="dropdown">
-                            <button type="button" class="btn-sm btn-outline dropdwon-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Lowest Price <i class="fas fa-caret-down"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                {% for listing in item.listings %}
-                                    <a class="dropdown-item" href={{ listing.model_url }}>{{ listing.vendor_name }} - ${{ listing.price }}</a>
-                                {% endfor %}
+                    <div class="card border-0" style="width: 11rem;">
+                        <img class="card-img-top p-4" src={{ item.image }} alt="{{ item.model }} image">
+                        <div class="card-body">
+                        <p class="card-text"><i>{{ item.brand }}</i><br>{{ item.model }}</p>
+                        <p>
+                            <div class="dropdown">
+                                <button type="button" class="btn-sm btn-outline dropdwon-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Lowest Price <i class="fas fa-caret-down"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    {% for listing in item.listings %}
+                                        <a class="dropdown-item" href={{ listing.model_url }}>{{ listing.vendor_name }} - ${{ listing.price }}</a>
+                                    {% endfor %}
+                                </div>
                             </div>
-                          </div>
 
 
 
-                    </p>
+                        </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}
