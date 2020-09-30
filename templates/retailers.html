@@ -3,27 +3,32 @@
 {% block title %}Retailers{% endblock %}
 
 {% block content %}
-<br><br><br>
+<body id="retailers-body">
+    <br><br><br>
 
-<div class="container text-center">
-    
-<div class="m-4">
-
-    <h1>Current Retailers</h1>
-
-</div>
+    <div class="container-flex">
 
 
-    <div class="row">
-        <div class="col-sm">
-            <a href="/retailers/rei"><img class="img-thumbnail" src="/static/images/REI_thumbnail.jpg" alt="REI image"></a>
-            {# notes: image source = https://d3g9pb5nvr3u7.cloudfront.net/sites/5a05fcb14fe342030f5478ea/-744724554/256.jpg #}
-        </div>
-        <div class="col-sm">
-            <a href="/retailers/backcountry"><img class="img-thumbnail" src="/static/images/backcountry_thumbnail.jpg" alt="backcountry image"></a>
-            {# note: image source = https://apprecs.org/ios/images/app-icons/256/27/450920999.jpg #}
+        <div class="container text-center retailers my-5 p-4">
+            
+            <div class="m-4 p-4">
+
+                <h1 id="title-retailers">Current Retailers</h1>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm">
+                    <a href="/retailers/rei"><img class="img-thumbnail" src="/static/images/REI_thumbnail.png" alt="REI image"></a>
+                    {# notes: image source = https://d3g9pb5nvr3u7.cloudfront.net/sites/5a05fcb14fe342030f5478ea/-744724554/256.jpg #}
+                </div>
+                <div class="col-sm">
+                    <a href="/retailers/backcountry"><img class="img-thumbnail" src="/static/images/backcountry_thumbnail.png" alt="backcountry image"></a>
+                    {# note: image source = https://apprecs.org/ios/images/app-icons/256/27/450920999.jpg #}
+                </div>
+            </div>
         </div>
     </div>
-</div>
-
+</body>
 {% endblock %}

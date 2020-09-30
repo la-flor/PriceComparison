@@ -65,3 +65,22 @@ body {
 .round {
     border-radius: 10px;
 }
+
+/* Retailers styles */
+
+body#retailers-body {
+    background-image: url("/static/images/background_kayaker.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+#title-retailers {
+    font-size: 5rem;
+    color: rgb(0, 0, 0);
+}
+
+div.retailers {
+    background: rgb(100%,100%,100%,.4);
+    min-height: 850px;
+}
