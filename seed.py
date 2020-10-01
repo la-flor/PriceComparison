@@ -63,6 +63,8 @@ for retailer in ["Backcountry", "REI"]:
                                                                 vendor_id=v_listing.id)
                     db.session.add(listing_relationship)
                     db.session.commit()
+                except:
+                    product_errors.append(product)
 
             elif product:
                 # If this product is not already in the products table, create new entry in products table
