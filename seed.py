@@ -2,6 +2,7 @@ from models import db, connect_db, Activity, Product, Category, ListingAssociati
 from app import API_KEY, tokens
 import requests
 from app import app
+import os
 
 db.drop_all()
 db.create_all()
