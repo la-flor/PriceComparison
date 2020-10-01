@@ -8,7 +8,7 @@ import pdb
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///price_comparison'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql:///price_comparison')
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'shh')
 app.config['API_KEY'] = os.environ.get('API_KEY')
