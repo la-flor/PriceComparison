@@ -38,6 +38,9 @@ def products(activity):
     activity_id = Activity.query.filter_by(activity=activity).first().id
     all_categories = Category.query.filter_by(activity_id=activity_id).all()
     cat_ids = []
+    banners = {"Trail Running": "banner_trailrun.png", "Camping": "banner_camping.png", "Climbing": "banner_climbing.png"}
+    
+    banner = banners[activity]
 
     for cat in all_categories:
         cat_ids.append(cat.id)
@@ -57,7 +60,7 @@ def products(activity):
                 if prod.category_id in cat_ids:
                     products.append(prod)
 
-        return render_template('products.html', categories=all_categories, activity=activity, products=products)
+        return render_template('products.html', categories=all_categories, activity=activity, products=products, banner=banner)
 
     elif request.args:
         filters = []
@@ -79,7 +82,7 @@ def products(activity):
             filtered_products = Product.query.filter_by(category_id=identity).all()
             for product in filtered_products:
                 products.append(product)
-        return render_template('products.html', checked=filters, categories=all_categories, activity=activity, products=products)
+        return render_template('products.html', checked=filters, categories=all_categories, activity=activity, products=products, banner=banner)
 
     else:
         category = Category.query.filter_by(activity_id=activity_id).all()
@@ -89,4 +92,4 @@ def products(activity):
             for prod in cat_prods:
                 products.append(prod)
 
-        return render_template('products.html', categories=all_categories, activity=activity, products=products)
+        return render_template('products.html', categories=all_categories, activity=activity, products=products, banner=banner)
