@@ -8,7 +8,7 @@ app.config['SQLALCHEMY_ECHO'] = False
 # Make Flask errors be real errors, rather than HTML pages with error info
 app.config['TESTING'] = True
 
-class SeedDatabaseTestCase(TestCase):
+class FlaskAppTestCase(TestCase):
     """Test for route requests"""
 
     def setUp(self):
@@ -61,7 +61,7 @@ class SeedDatabaseTestCase(TestCase):
             html = resp.get_data(as_text=True)
 
             self.assertEqual(resp.status_code, 200)
-            self.assertIn('<h1>Current Retailers</h1>', html)
+            self.assertIn('<h1 id="title-retailers">Current Retailers</h1>', html)
     
     def test_activities(self):
         """Test activities page request returns activities.html and includes activities on page"""
@@ -70,7 +70,7 @@ class SeedDatabaseTestCase(TestCase):
             html = resp.get_data(as_text=True)
 
             self.assertEqual(resp.status_code, 200)
-            self.assertIn("<h1>Activities</h1>", html)
+            self.assertIn('<h1 id="title-activities">Activities</h1>', html)
             self.assertIn("Climbing", html)
     
     def test_products(self):
