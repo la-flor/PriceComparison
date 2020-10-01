@@ -1,5 +1,5 @@
 from models import db, connect_db, Activity, Product, Category, ListingAssociation, VendorListing
-from keys import API_KEY, tokens
+from app import API_KEY, tokens
 import requests
 from app import app
 
