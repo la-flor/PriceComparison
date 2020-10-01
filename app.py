@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, flash, request, jsonify
 import requests
 import json
-from keys import tokens
+from keys import KEY_API, KEY_SECRET
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Activity, Product, Category, ListingAssociation, VendorListing
 import pdb
@@ -10,13 +10,16 @@ import os
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql:///price_comparison')
 
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'shh')
-app.config['API_KEY'] = os.environ.get('API_KEY')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', KEY_SECRET)
+app.config['API_KEY'] = os.environ.get('API_KEY', KEY_API)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 toolbar = DebugToolbarExtension(app)
+
+tokens = {"Backcountry": "ti01OeVZaoTP", "REI": "t_KFBo7iQaG7"}
+
 
 connect_db(app)
 

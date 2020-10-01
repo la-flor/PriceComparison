@@ -1,4 +1,5 @@
 venv/
+keys.py
 __pycache__/
 __pycache__/app.cpython-38.pyc
 __pycache__/keys.cpython-38.pyc
