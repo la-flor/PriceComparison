@@ -4,7 +4,7 @@ import requests
 from app import app
 import os
 
-app.config['API_KEY'] = os.environ.get('API_KEY')
+API_KEY = os.environ.get('API_KEY')
 
 db.drop_all()
 db.create_all()
