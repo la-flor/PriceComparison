@@ -1,8 +1,10 @@
 from models import db, connect_db, Activity, Product, Category, ListingAssociation, VendorListing
-from app import API_KEY, tokens
+from app import tokens
 import requests
 from app import app
 import os
+
+app.config['API_KEY'] = os.environ.get('API_KEY', KEY_API)
 
 db.drop_all()
 db.create_all()
