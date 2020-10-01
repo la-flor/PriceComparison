@@ -1,15 +1,18 @@
 from flask import Flask, render_template, redirect, flash, request, jsonify
 import requests
 import json
-from keys import API_KEY, SECRET_KEY, tokens
+from keys import tokens
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Activity, Product, Category, ListingAssociation, VendorListing
 import pdb
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///price_comparison'
 
-app.config['SECRET_KEY'] = SECRET_KEY
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'shh')
+app.config['API_KEY'] = os.environ.get('API_KEY')
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
