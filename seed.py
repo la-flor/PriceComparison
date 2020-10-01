@@ -46,42 +46,47 @@ for retailer in ["Backcountry", "REI"]:
     token = tokens[retailer]
     resp = requests.get(f'https://www.parsehub.com/api/v2/projects/{token}/last_ready_run/data', params={"api_key": API_KEY})
     data = resp.json()
-
+    product_errors = []
     for cat in data[retailer]:
         for product in cat["products"]:
             if product and Product.query.filter_by(model=product["model"]).first():
                 # If product is already found in Products table, do not create a new product.
                 # Only create a new vendor_listing and listing_association entry.
-                v_listing = VendorListing(vendor_name=retailer,
-                                                model_url=product["model_url"],
-                                                price=product["price"])
-                db.session.add(v_listing)
-                db.session.commit()
+                try:
+                    v_listing = VendorListing(vendor_name=retailer,
+                                                    model_url=product["model_url"],
+                                                    price=product["price"])
+                    db.session.add(v_listing)
+                    db.session.commit()
 
-                listing_relationship = ListingAssociation(product_id=Product.query.filter_by(model=product["model"]).first().id,
-                                                            vendor_id=v_listing.id)
-                db.session.add(listing_relationship)
-                db.session.commit()
+                    listing_relationship = ListingAssociation(product_id=Product.query.filter_by(model=product["model"]).first().id,
+                                                                vendor_id=v_listing.id)
+                    db.session.add(listing_relationship)
+                    db.session.commit()
+
             elif product:
-                
                 # If this product is not already in the products table, create new entry in products table
                 # and create a vendor_listing and listing_association entry.
-                category_id = Category.query.filter_by(category_name=cat["category"]).first()
-                prod = Product(brand=product["brand"],
-                                model=product["model"],
-                                image=product["image"],
-                                category=category_id)
-                db.session.add(prod)
-                db.session.commit()
+                try:
+                    category_id = Category.query.filter_by(category_name=cat["category"]).first()
+                    prod = Product(brand=product["brand"],
+                                    model=product["model"],
+                                    image=product["image"],
+                                    category=category_id)
+                    db.session.add(prod)
+                    db.session.commit()
 
-                v_listing = VendorListing(vendor_name=retailer,
-                                                model_url=product["model_url"],
-                                                price=product["price"])
-                db.session.add(v_listing)
-                db.session.commit()
+                    v_listing = VendorListing(vendor_name=retailer,
+                                                    model_url=product["model_url"],
+                                                    price=product["price"])
+                    db.session.add(v_listing)
+                    db.session.commit()
 
-                listing_relationship = ListingAssociation(product_id=Product.query.filter_by(model=product["model"]).first().id,
-                                                            vendor_id=v_listing.id)
-                db.session.add(listing_relationship)
-                db.session.commit()
-
+                    listing_relationship = ListingAssociation(product_id=Product.query.filter_by(model=product["model"]).first().id,
+                                                                vendor_id=v_listing.id)
+                    db.session.add(listing_relationship)
+                    db.session.commit()
+                except:
+                    product_errors.append(product)
+    
+print(product_errors)
