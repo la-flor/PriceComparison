@@ -83,12 +83,12 @@
                         <div class="card-body">
                         <p class="card-text"><i>{{ item.brand }}</i><br>{{ item.model }}</p>
                         <p>
-                            <div class="dropdown">
-                                <button type="button" class="btn-sm btn-outline dropdwon-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Lowest Price <i class="fas fa-caret-down"></i>
-                                </button>
+                            <div class="btn-group">
+                                {% set lowest_listing = item.listings | min(attribute='price') %}
+                                <a href="{{ lowest_listing.model_url }}"><button type="button" class="btn-sm">${{ lowest_listing.price }}</button></a>
+                                <button type="button" class="btn-sm btn-outline dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    {% for listing in item.listings %}
+                                    {% for listing in item.listings|sort(attribute='price') %}
                                         <a class="dropdown-item" href="{{ listing.model_url }}">{{ listing.vendor_name }} - ${{ listing.price }}</a>
                                     {% endfor %}
                                 </div>

@@ -1,5 +1,8 @@
 venv/
+*.pyc
+__pycache__
+.DS_Store
+.vscode/settings.json
+
 keys.py
-__pycache__/
-__pycache__/app.cpython-38.pyc
-__pycache__/keys.cpython-38.pyc
+products.js
