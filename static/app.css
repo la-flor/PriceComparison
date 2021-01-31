@@ -9,7 +9,7 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-  }
+}
 
 .centered {
     position: absolute;
@@ -19,8 +19,25 @@ body {
     transform: translate(-50%, -50%);
     color: white;
     text-decoration: none;
+    text-align: center;
+    
 }
 
+#carouselSlides {
+    z-index: -1;
+}
+
+/* for home page center link "Shop Activities!" */
+#shop-link {
+    font-size: 3em;
+    color: rgb(248, 249, 249, 0.8);
+}
+
+#shop-link:hover {
+    font-size: 3.5em;
+    color: rgb(248, 249, 249, 1);
+    text-shadow: 3px 3px rgb(0, 0, 0, .1)
+}
 
 
 
@@ -64,63 +81,38 @@ body {
 
 
 
-/* Retailers page styles */
-
-body#retailers-body {
-    background-image: url("/static/images/background_mtnlandscape.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-}
-
-#title-retailers {
-    font-size: 5rem;
-    color: rgb(0, 0, 0);
-}
-
-div.retailers {
-    background: rgb(100%,100%,100%,.2);
-    min-height: 850px;
-    text-align: center;
-    margin-bottom: 30px;
-    margin-top: 30px;
-    padding-top: 50px;
-    border-radius: 10px;
-}
-
-.retailers-row {
-    margin-top: 150px;
-}
-
-
-
 /* Activities page styles */
 
 body#activities-body {
     background-image: url("/static/images/background_wanaka.jpg");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    background-size: auto;
 }
 
 #title-activities {
-    font-size: 5rem;
-    color: rgb(0, 0, 0);
+    font-size: 6rem;
+    color: rgb(248, 249, 249, 0.8)
 }
 
 div.activities {
-    background: rgb(100%,100%,100%,.2);
     min-height: 850px;
     text-align: center;
     padding: 40px;
     margin-bottom: 30px;
     margin-top: 30px;
     padding-top: 50px;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 .activity-image {
     width: 250px;
+    box-shadow: 10px 10px 6px rgba(138, 138, 138, 0.3);
+    border-radius: 15px;
+}
+.activity-image:hover {
+    border-style: solid;
+    border-color: rgba(138, 138, 138, 0.2);
 }
 
 .activities-row {

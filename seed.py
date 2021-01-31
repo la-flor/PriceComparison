@@ -1,10 +1,13 @@
 from models import db, connect_db, Activity, Product, Category, ListingAssociation, VendorListing
-from app import tokens
 import requests
 from app import app
 import os
 
-API_KEY = os.environ.get('API_KEY')
+API_KEY = os.environ.get('PRICE_COMP_API_KEY')
+BACKCOUNTRY_TOKEN = os.environ.get('BACKCOUNTRY_TOKEN')
+REI_TOKEN = os.environ.get('REI_TOKEN')
+
+tokens = {"Backcountry": BACKCOUNTRY_TOKEN, "REI": REI_TOKEN}
 
 db.drop_all()
 db.create_all()
@@ -30,7 +33,7 @@ cat13 = Category(category_name="Sleeping Pads", activity=act3)
 db.session.add_all([cat1,cat4,cat5,cat7,cat8,cat12,cat13])
 db.session.commit()
 
-# To add in the future:
+# Categories and activities to add in the future:
 
 # Activities:
 # act4 = Activity(activity="Skiing", image="static/images/activity_ski.jpeg")
