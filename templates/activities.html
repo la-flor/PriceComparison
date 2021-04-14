@@ -3,27 +3,31 @@
 {% block title %}Activities{% endblock %}
 
 {% block content %}
+
 <body id="activities-body">
 
-    <br><br><br>
+  <br><br><br>
 
-    <div class="container activities">
+  <div class="container activities">
 
-        <h1 id="title-activities">Activities</h1>
+    <h1 id="title-activities">Activities</h1>
 
 
-        <div class="row activities-row">
-            {% for activity in activities %}
+    <div class="row activities-row">
+      {% for activity in activities %}
 
-                <div class="col-sm m-3">
-                    <a href="/activity/{{ activity.activity }}"><img src={{ activity.image }} class="activity-image"><div class="centered">{{ activity.activity }}</div></a>
-                    
-                </div>
+      <div class="col-sm m-3">
+        <a href="/activity/{{ activity.activity }}">
+          <img src={{ activity.image }} class="zoom activity-image">
+          <div class="activity-text">{{ activity.activity }}</div>
+        </a>
 
-            {% endfor %}
-            </div>
+      </div>
 
+      {% endfor %}
     </div>
+
+  </div>
 
 </body>
 {% endblock %}

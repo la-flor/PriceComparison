@@ -8,51 +8,51 @@
 <br><br>
 
 <div>
-    <img src="/static/images/{{ banner }}" width="100%">
+  <img src="/static/images/{{ banner }}" width="100%">
 </div>
 
 <div class="container mb-3">
-            <nav class="navbar navbar-expand-md bg-light navbar-light mx-5 px-5">
-                <button class="navbar-toggler m-auto p-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggle justify-content-center text-center">Search Criteria:</span>
-                </button>
+  <nav class="navbar navbar-expand-md bg-light navbar-light px-5">
+    <!-- Navbar display for devices -->
+    <button class="navbar-toggler m-auto p-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggle justify-content-center text-center">Search Criteria:</span>
+    </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
 
-                        <!-- Dropdown -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                                    Filters
-                                </a>
-                                
-                                <div class="dropdown-menu p-2 round mb-2">
-                                    <form class="form-check" action="/activity/{{ activity }}" method="GET">
-                                        {% for cat in categories %}
-                                        
-                                            <input type="checkbox" class="form-check-input" name="{{cat.category_name}}" value="{{cat.category_name}}" 
-                                                {% if cat.category_name in checked %}
-                                                checked
-                                                {% endif %}>
-                                            <label class="form-check-label" for="{{cat.category_name}}">{{cat.category_name}}</label>
-                                            <br>                                    
-                                        {% endfor %}
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Filters
+          </a>
 
-                                    <div class="dropdown-divider"></div>
-                                
-                                    <label class="dropdown-item-text"><button type="submit" class="btn btn-info">Apply</button></label>
-                                </div>
-                            </li>
-                        </form>
+          <div class="dropdown-menu p-2 round mb-2">
+            <form class="form-check" action="/activity/{{ activity }}" method="GET">
+              {% for cat in categories %}
 
-                    </ul>
+              <input type="checkbox" class="form-check-input" name="{{cat.category_name}}" value="{{cat.category_name}}"
+                {% if cat.category_name in checked %} checked {% endif %}>
+              <label class="form-check-label" for="{{cat.category_name}}">{{cat.category_name}}</label>
+              <br>
+              {% endfor %}
+            </form>
 
-                    <form class="form-inline" action="/activity/{{ activity }}" method="POST">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
-                        <button class="btn btn-info" type="submit">Search</button>
-                    </form>
-                </div>
-            </nav>
+            <div class="dropdown-divider"></div>
+
+            <label class="dropdown-item-text"><button type="submit" class="btn btn-products-page">Apply</button></label>
+          </div>
+        </li>
+
+      </ul>
+
+      <form class="form-inline" action="/activity/{{ activity }}" method="POST">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
+        <button class="btn-products-page btn" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
 </div>
 
 
@@ -62,44 +62,43 @@
 
 <div class="container col-sm-12 col-md-9 col-lg-8">
 
-    <div class="row pb-5 mb-5 justify-content-center">
+  <div class="row pb-5 mb-5 justify-content-center">
 
-        {% if products | length < 1 %}
-        <div class="text-center">
-            <p class="my-5">
-                <h1>No products fit this criteria</h1>
-            </p>
-            
-            <p class="my-5">
-                <a href="/activity/{{ activity }}">Clear Search</a>
-            </p>
-        </div>
-        {% else %}
-            {% for item in products %}
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    {% if products | length < 1 %} <div class="text-center">
+      <p class="my-5">
+      <h1>No products fit this criteria</h1>
+      </p>
 
-                    <div class="card border-0" style="width: 11rem;">
-                        <img class="card-img-top p-4" src="{{ item.image }}" alt="{{ item.model }} image">
-                        <div class="card-body">
-                        <p class="card-text"><i>{{ item.brand }}</i><br>{{ item.model }}</p>
-                        <p>
-                            <div class="btn-group">
-                                {% set lowest_listing = item.listings | min(attribute='price') %}
-                                <a href="{{ lowest_listing.model_url }}"><button type="button" class="btn-sm">${{ lowest_listing.price }}</button></a>
-                                <button type="button" class="btn-sm btn-outline dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    {% for listing in item.listings|sort(attribute='price') %}
-                                        <a class="dropdown-item" href="{{ listing.model_url }}">{{ listing.vendor_name }} - ${{ listing.price }}</a>
-                                    {% endfor %}
-                                </div>
-                            </div>
+      <p class="my-5">
+        <a href="/activity/{{ activity }}">Clear Search</a>
+      </p>
+  </div>
+  {% else %}
+  {% for item in products %}
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 
-
-                        </p>
-                        </div>
-                    </div>
-                </div>
+    <div class="card border-0" style="width: 11rem;">
+      <img class="card-img-top p-4" src="{{ item.image }}" alt="{{ item.model }} image">
+      <div class="card-body">
+        <p class="card-text"><i>{{ item.brand }}</i><br>{{ item.model }}</p>
+        <p>
+        <div class="btn-group">
+          {% set lowest_listing = item.listings | min(attribute='price') %}
+          <a href="{{ lowest_listing.model_url }}"><button type="button" class="btn-products-page btn-sm">${{
+              lowest_listing.price }}</button></a>
+          <button type="button" class="btn-products-page btn-sm btn-outline dropdown-toggle dropdown-toggle-split"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% for listing in item.listings|sort(attribute='price') %}
+            <a class="dropdown-item" href="{{ listing.model_url }}">{{ listing.vendor_name }} - ${{ listing.price }}</a>
             {% endfor %}
-        {% endif %}
+          </div>
+        </div>
+        </p>
+      </div>
     </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
 {% endblock %}

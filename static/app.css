@@ -1,42 +1,41 @@
 body {
-    font-family: 'Jomolhari', serif;
+  font-family: 'Jomolhari', serif;
 }
 
 
 
 /* For home page carousel */
 .full-screen {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 2rem;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 2rem;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-decoration: none;
+  text-align: center;
 }
 
 #carouselSlides {
-    z-index: -1;
+  z-index: -1;
 }
 
 /* for home page center link "Shop Activities!" */
 #shop-link {
-    font-size: 3em;
-    color: rgb(248, 249, 249, 0.8);
+  font-size: 3em;
+  color: rgb(248, 249, 249, 0.8);
 }
 
 #shop-link:hover {
-    font-size: 3.5em;
-    color: rgb(248, 249, 249, 1);
-    text-shadow: 3px 3px rgb(0, 0, 0, .1)
+  font-size: 3.5em;
+  color: rgb(248, 249, 249, 1);
+  text-shadow: 3px 3px rgb(0, 0, 0, .1)
 }
 
 
@@ -44,82 +43,106 @@ body {
 /* For products page */
 
 .card {
-    margin: 0 auto;
-    float: none;
-    margin-bottom: 10px;
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+}
+
+.btn-products-page {
+  background-color: rgb(199, 198, 250, .3);
+  border: solid 1px rgb(199, 198, 250, .8);
 }
 
 #filters {
-    min-width: 260px;
-    margin: 0 auto;
-    float: none;
-    margin-bottom: 10px;
+  min-width: 260px;
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
 }
 
 .title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 5rem;
-    transform: translate(-50%, -50%);
-    color: rgb(248, 249, 249, 0.6);
-    z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 5rem;
+  transform: translate(-50%, -50%);
+  color: rgb(248, 249, 249, 0.6);
+  z-index: 1;
 }
 
 .round {
-    border-radius: 10px;
+  border-radius: 10px;
 }
 
 #dropdownMenuButton:hover {
-    border-width: 3;
-    border-color: black;
+  border-width: 3;
+  border-color: black;
 }
 
 .filter-input {
-    margin: 200px;
+  margin: 200px;
 }
 
+.btn-price-dropdown {
+  background-color: rgb(41, 138, 48, .1);
+  border: 1px solid grey;
+}
 
 
 /* Activities page styles */
 
 body#activities-body {
-    background-image: url("/static/images/background_wanaka.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: auto;
+  background-image: url("/static/images/background_wanaka.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
 }
 
 #title-activities {
-    font-size: 6rem;
-    color: rgb(248, 249, 249, 0.8)
+  font-size: 6rem;
+  color: rgb(248, 249, 249, 0.8)
 }
 
 div.activities {
-    min-height: 850px;
-    text-align: center;
-    padding: 40px;
-    margin-bottom: 30px;
-    margin-top: 30px;
-    padding-top: 50px;
-    border-radius: 20px;
+  min-height: 850px;
+  text-align: center;
+  padding: 40px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  padding-top: 50px;
+  border-radius: 20px;
+}
+
+.activity-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 2rem;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-decoration: none;
+  text-align: center;
 }
 
 .activity-image {
-    width: 250px;
-    box-shadow: 10px 10px 6px rgba(138, 138, 138, 0.3);
-    border-radius: 15px;
+  width: 250px;
+  box-shadow: 10px 10px 6px rgba(138, 138, 138, 0.3);
+  border-radius: 15px;
 }
-.activity-image:hover {
-    border-style: solid;
-    border-color: rgba(138, 138, 138, 0.2);
+
+.zoom {
+  transition: transform .3s;
+}
+
+.zoom:hover {
+  transform: scale(1.1);
 }
 
 .activities-row {
-    margin-top: 150px;
+  margin-top: 150px;
 }
 
 div.activity {
-    padding-left: 30px;
-    padding-right: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
