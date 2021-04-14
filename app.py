@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, flash, request, jsonify
 import requests
 import json
-# from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Activity, Product, Category, ListingAssociation, VendorListing
 import pdb
 import os
@@ -15,7 +14,6 @@ app.config['API_KEY'] = os.environ.get('PRICE_COMP_API_KEY')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-# toolbar = DebugToolbarExtension(app)
 
 
 connect_db(app)
